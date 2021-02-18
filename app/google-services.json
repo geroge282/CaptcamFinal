@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "305236183485",
+    "firebase_url": "https://captcam-3397e.firebaseio.com",
+    "project_id": "captcam-3397e",
+    "storage_bucket": "captcam-3397e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305236183485:android:2e898580f0f34b75c22ad4",
+        "android_client_info": {
+          "package_name": "com.example.captcam1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "305236183485-tevb6fjhpqlvggagtq2q25f3f8vdcr16.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpk3KtoYVoaiahhJpyUgnlvlgIOEpLR5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "305236183485-tevb6fjhpqlvggagtq2q25f3f8vdcr16.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
