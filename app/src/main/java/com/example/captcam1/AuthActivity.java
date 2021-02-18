@@ -35,7 +35,7 @@ public class AuthActivity extends AppCompatActivity {
     FirebaseAuth.AuthStateListener listener;
     final private int REQUEST_CODE_ASK_PERMISSION=111;
 
-
+//aqui cambio
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
