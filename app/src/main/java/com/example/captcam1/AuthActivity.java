@@ -31,6 +31,7 @@ public class AuthActivity extends AppCompatActivity {
     Button btnRegistrar;
     FirebaseAuth mAuth;
     ProgressBar pbCarga;
+
     FirebaseAuth.AuthStateListener listener;
     final private int REQUEST_CODE_ASK_PERMISSION=111;
 
