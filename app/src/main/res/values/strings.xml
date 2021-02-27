@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CAPTCAM 1</string>
+    <string name="detectar">DETECTAR</string>
 </resources>

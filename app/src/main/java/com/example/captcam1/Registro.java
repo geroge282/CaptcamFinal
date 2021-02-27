@@ -22,9 +22,11 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
     private EditText txtcorreo;
     private EditText txtPassword;
     private Button btnGuardar;
+    private Button btnFoto;
+
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
-    private Button btnSalir;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,10 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         firebaseAuth = FirebaseAuth.getInstance();
         txtcorreo = findViewById(R.id.edCorreo);
         txtPassword = findViewById(R.id.edPassword);
-        Button btnGuardar = findViewById(R.id.btnGuardar);
+        btnFoto=findViewById(R.id.btnTomarFoto);
 
-        progressDialog = new ProgressDialog(this);
+         btnGuardar = findViewById(R.id.btnGuardar);
+         progressDialog = new ProgressDialog(this);
         btnGuardar.setOnClickListener(this);
 
     }
@@ -86,6 +89,13 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
 
 
         Intent intent=new Intent(v.getContext(), AuthActivity.class);
+        startActivityForResult(intent,1);
+
+    }
+    public void BotonFoto(View v){
+
+
+        Intent intent=new Intent(v.getContext(), camaraDetect.class);
         startActivityForResult(intent,1);
 
     }

@@ -13,12 +13,14 @@
         android:layout_weight="9"
         android:layout_width="match_parent"
         android:layout_height="48pt" />
+
     <Button
-        android:id="@+id/tomarFoto"
-        android:layout_weight="1"
-        android:text="TOMAR FOTO"
+        android:id="@+id/btnTomarFoto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="BotonFoto"
+        android:text="TOMAR FOTO" />
 
     <EditText
         android:id="@+id/edNombre"
@@ -74,7 +76,7 @@
 
         <Button
             android:id="@+id/btnRegresar"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_rounded"
             android:onClick="BotonRegresar"
