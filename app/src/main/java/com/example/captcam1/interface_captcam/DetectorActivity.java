@@ -397,9 +397,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     TextView tvTitle = dialogLayout.findViewById(R.id.dlg_title);
     EditText etName = dialogLayout.findViewById(R.id.dlg_input);
 
-    tvTitle.setText("Add Face");
+    tvTitle.setText("ROSTRO RECONOCIDO");
     ivFace.setImageBitmap(rec.getCrop());
-    etName.setHint("Input name");
+    etName.setHint("Ingrese nombre");
 
     builder.setPositiveButton("OK", new DialogInterface.OnClickListener(){
       @Override

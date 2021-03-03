@@ -25,12 +25,11 @@
         />
 
     <EditText
-        android:layout_gravity="center"
         android:id="@+id/dlg_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:hint="The dialog hint"
-        />
+        android:layout_gravity="center"
+        tools:hint="nombre" />
 
 
 </LinearLayout>
