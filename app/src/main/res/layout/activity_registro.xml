@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".Registro">
+    tools:context=".interface_captcam.Registro">
 
     <ImageView
         android:id="@+id/imageViewId"

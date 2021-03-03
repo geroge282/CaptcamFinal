@@ -7,7 +7,7 @@
     android:background="#202732"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".AuthActivity">
+    tools:context=".interface_captcam.AuthActivity">
 
 
     <ImageView

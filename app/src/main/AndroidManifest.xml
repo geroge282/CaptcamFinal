@@ -2,7 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
     package="com.example.captcam1">
+
+
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     
 
@@ -14,12 +20,13 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".confirmacion" />
-        <activity android:name=".homeUsuario" />
-        <activity android:name=".Registro" />
-        <activity android:name=".camaraDetect"/>
-        <activity android:name=".AuthActivity">
-        
+        <activity android:name=".interface_captcam.confirmacion" />
+        <activity android:name=".interface_captcam.homeUsuario" />
+        <activity android:name=".interface_captcam.Registro" />
+        <activity android:name=".interface_captcam.DetectorActivity"/>
+        <activity android:name=".interface_captcam.AuthActivity">
+
+
 
             <meta-data
                 android:name="com.google.firebase.ml.vision.DEPENDENCIES"
