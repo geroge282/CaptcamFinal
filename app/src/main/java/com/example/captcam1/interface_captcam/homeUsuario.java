@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class homeUsuario extends AppCompatActivity {
     private Button btnCerrarSesion;
+    private Button btnActivars;
     private TextView txtNombreFinal;
     private TextView txtCorreoFinal;
     private FirebaseAuth mAuth;
@@ -25,6 +26,7 @@ public class homeUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homeusuario);
         btnCerrarSesion=findViewById(R.id.btnCerrarSesion);
+        btnActivars=findViewById(R.id.btnActivar);
         txtNombreFinal=findViewById(R.id.txtNombreFinal);
         txtCorreoFinal=findViewById(R.id.txtCorreoFinal);
         mAuth=FirebaseAuth.getInstance();

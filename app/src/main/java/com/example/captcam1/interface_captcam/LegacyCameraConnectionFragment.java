@@ -21,7 +21,6 @@ import android.app.Fragment;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -33,7 +32,6 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.RequiresApi;
 
 import com.example.captcam1.R;
 import com.example.captcam1.interface_captcam.customview.AutoFitTextureView;
@@ -71,7 +69,6 @@ public class LegacyCameraConnectionFragment extends Fragment {
    */
   private final TextureView.SurfaceTextureListener surfaceTextureListener =
       new TextureView.SurfaceTextureListener() {
-        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public void onSurfaceTextureAvailable(
                 final SurfaceTexture texture, final int width, final int height) {
@@ -176,7 +173,6 @@ public class LegacyCameraConnectionFragment extends Fragment {
     }
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
   @Override
   public void onPause() {
     stopCamera();
@@ -191,7 +187,6 @@ public class LegacyCameraConnectionFragment extends Fragment {
   }
 
   /** Stops the background thread and its {@link Handler}. */
-  @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
   private void stopBackgroundThread() {
     backgroundThread.quitSafely();
     try {

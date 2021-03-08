@@ -29,7 +29,6 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.hardware.camera2.CameraCharacteristics;
 import android.media.ImageReader.OnImageAvailableListener;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Size;
@@ -41,8 +40,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
-
 import com.example.captcam1.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -52,9 +49,6 @@ import com.google.mlkit.vision.face.FaceDetection;
 import com.google.mlkit.vision.face.FaceDetector;
 import com.google.mlkit.vision.face.FaceDetectorOptions;
 
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 import com.example.captcam1.interface_captcam.customview.OverlayView;
 import com.example.captcam1.interface_captcam.customview.OverlayView.DrawCallback;
 import com.example.captcam1.interface_captcam.env.BorderedText;
@@ -64,11 +58,14 @@ import com.example.captcam1.interface_captcam.tflite.SimilarityClassifier;
 import com.example.captcam1.interface_captcam.tflite.TFLiteObjectDetectionAPIModel;
 import com.example.captcam1.interface_captcam.tracking.MultiBoxTracker;
 
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * An activity that uses a TensorFlowMultiBoxDetector and ObjectTracker to detect and then track
  * objects.
  */
-@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 public class DetectorActivity extends CameraActivity implements OnImageAvailableListener {
   private static final Logger LOGGER = new Logger();
 
@@ -175,7 +172,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @Override
   public void onPreviewSizeChosen(final Size size, final int rotation) {
     final float textSizePx =
@@ -397,9 +393,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     TextView tvTitle = dialogLayout.findViewById(R.id.dlg_title);
     EditText etName = dialogLayout.findViewById(R.id.dlg_input);
 
-    tvTitle.setText("ROSTRO RECONOCIDO");
+    tvTitle.setText("Add Face");
     ivFace.setImageBitmap(rec.getCrop());
-    etName.setHint("Ingrese nombre");
+    etName.setHint("Input name");
 
     builder.setPositiveButton("OK", new DialogInterface.OnClickListener(){
       @Override

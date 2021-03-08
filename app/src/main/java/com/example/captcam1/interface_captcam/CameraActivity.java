@@ -47,7 +47,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
@@ -56,13 +55,11 @@ import com.example.captcam1.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import com.example.captcam1.interface_captcam.env.ImageUtils;
 import com.example.captcam1.interface_captcam.env.Logger;
 
 import java.nio.ByteBuffer;
 
-import com.example.captcam1.interface_captcam.env.ImageUtils;
-
-@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 public abstract class CameraActivity extends AppCompatActivity
     implements OnImageAvailableListener,
         Camera.PreviewCallback,
@@ -109,15 +106,14 @@ public abstract class CameraActivity extends AppCompatActivity
 
 
 
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     LOGGER.d("onCreate " + this);
     super.onCreate(null);
 
     Intent intent = getIntent();
-    //useFacing = intent.getIntExtra(KEY_USE_FACING, CameraCharacteristics.LENS_FACING_FRONT);
-    useFacing = intent.getIntExtra(KEY_USE_FACING, CameraCharacteristics.LENS_FACING_BACK);
+    useFacing = intent.getIntExtra(KEY_USE_FACING, CameraCharacteristics.LENS_FACING_FRONT);
+    //useFacing = intent.getIntExtra(KEY_USE_FACING, CameraCharacteristics.LENS_FACING_BACK);
 
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -148,7 +144,7 @@ public abstract class CameraActivity extends AppCompatActivity
         new ViewTreeObserver.OnGlobalLayoutListener() {
           @Override
           public void onGlobalLayout() {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
               gestureLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
             } else {
               gestureLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
@@ -252,7 +248,6 @@ public abstract class CameraActivity extends AppCompatActivity
   }
 
   /** Callback for android.hardware.Camera API */
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @Override
   public void onPreviewFrame(final byte[] bytes, final Camera camera) {
     if (isProcessingFrame) {
@@ -417,10 +412,9 @@ public abstract class CameraActivity extends AppCompatActivity
     }
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @Override
   public void onRequestPermissionsResult(
-      final int requestCode, final String[] permissions, final int[] grantResults) {
+          final int requestCode, final String[] permissions, final int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     if (requestCode == PERMISSIONS_REQUEST) {
       if (allPermissionsGranted(grantResults)) {
@@ -452,7 +446,7 @@ public abstract class CameraActivity extends AppCompatActivity
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       if (shouldShowRequestPermissionRationale(PERMISSION_CAMERA)) {
         Toast.makeText(
-                CameraActivity.this,
+                com.example.captcam1.interface_captcam.CameraActivity.this,
                 "Camera permission is required for this demo",
                 Toast.LENGTH_LONG)
             .show();
@@ -462,9 +456,8 @@ public abstract class CameraActivity extends AppCompatActivity
   }
 
   // Returns true if the device supports the required hardware level, or better.
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   private boolean isHardwareLevelSupported(
-      CameraCharacteristics characteristics, int requiredLevel) {
+          CameraCharacteristics characteristics, int requiredLevel) {
     int deviceLevel = characteristics.get(CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL);
     if (deviceLevel == CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY) {
       return requiredLevel == deviceLevel;
@@ -473,7 +466,6 @@ public abstract class CameraActivity extends AppCompatActivity
     return requiredLevel <= deviceLevel;
   }
 
-   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
    private String chooseCamera() {
 
         final CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
@@ -527,7 +519,6 @@ public abstract class CameraActivity extends AppCompatActivity
     }
 
 
- @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
  protected void setFragment() {
 
         this.cameraId = chooseCamera();
@@ -541,7 +532,7 @@ public abstract class CameraActivity extends AppCompatActivity
                                 public void onPreviewSizeChosen(final Size size, final int rotation) {
                                     previewHeight = size.getHeight();
                                     previewWidth = size.getWidth();
-                                    CameraActivity.this.onPreviewSizeChosen(size, rotation);
+                                  com.example.captcam1.interface_captcam.CameraActivity.this.onPreviewSizeChosen(size, rotation);
                                 }
                             },
                             this,

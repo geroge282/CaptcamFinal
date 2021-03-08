@@ -40,7 +40,6 @@ import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.ImageReader;
 import android.media.ImageReader.OnImageAvailableListener;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -54,7 +53,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
+import com.example.captcam1.R;
+import com.example.captcam1.interface_captcam.customview.AutoFitTextureView;
+import com.example.captcam1.interface_captcam.env.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,11 +65,6 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-import com.example.captcam1.R;
-import com.example.captcam1.interface_captcam.customview.AutoFitTextureView;
-import com.example.captcam1.interface_captcam.env.Logger;
-
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 @SuppressLint("ValidFragment")
 public class CameraConnectionFragment extends Fragment {
   private static final Logger LOGGER = new Logger();
@@ -148,7 +144,6 @@ public class CameraConnectionFragment extends Fragment {
           createCameraPreviewSession();
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public void onDisconnected(final CameraDevice cd) {
           cameraOpenCloseLock.release();
@@ -156,7 +151,6 @@ public class CameraConnectionFragment extends Fragment {
           cameraDevice = null;
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public void onError(final CameraDevice cd, final int error) {
           cameraOpenCloseLock.release();
@@ -176,13 +170,13 @@ public class CameraConnectionFragment extends Fragment {
       new TextureView.SurfaceTextureListener() {
         @Override
         public void onSurfaceTextureAvailable(
-            final SurfaceTexture texture, final int width, final int height) {
+                final SurfaceTexture texture, final int width, final int height) {
           openCamera(width, height);
         }
 
         @Override
         public void onSurfaceTextureSizeChanged(
-            final SurfaceTexture texture, final int width, final int height) {
+                final SurfaceTexture texture, final int width, final int height) {
           configureTransform(width, height);
         }
 
@@ -215,15 +209,14 @@ public class CameraConnectionFragment extends Fragment {
    * @param height The minimum desired height
    * @return The optimal {@code Size}, or an arbitrary one if none were big enough
    */
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   protected static Size chooseOptimalSize(final Size[] choices, final int width, final int height) {
     final int minSize = Math.max(Math.min(width, height), MINIMUM_PREVIEW_SIZE);
     final Size desiredSize = new Size(width, height);
 
     // Collect the supported resolutions that are at least as big as the preview Surface
     boolean exactSizeFound = false;
-    final List<Size> bigEnough = new ArrayList<Size>();
-    final List<Size> tooSmall = new ArrayList<Size>();
+    final List<Size> bigEnough = new ArrayList<>();
+    final List<Size> tooSmall = new ArrayList<>();
     for (final Size option : choices) {
       if (option.equals(desiredSize)) {
         // Set the size but don't return yet so that remaining sizes will still be logged.
@@ -257,35 +250,29 @@ public class CameraConnectionFragment extends Fragment {
     }
   }
 
-  public static CameraConnectionFragment newInstance(
+  public static com.example.captcam1.interface_captcam.CameraConnectionFragment newInstance(
       final ConnectionCallback callback,
       final OnImageAvailableListener imageListener,
       final int layout,
       final Size inputSize) {
-    return new CameraConnectionFragment(callback, imageListener, layout, inputSize);
+    return new com.example.captcam1.interface_captcam.CameraConnectionFragment(callback, imageListener, layout, inputSize);
   }
 
   /**
    * Shows a {@link Toast} on the UI thread.
    *
-   * @param text The message to show
    */
-  private void showToast(final String text) {
+  private void showToast() {
     final Activity activity = getActivity();
     if (activity != null) {
       activity.runOnUiThread(
-          new Runnable() {
-            @Override
-            public void run() {
-              Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
-            }
-          });
+              () -> Toast.makeText(activity, "Failed", Toast.LENGTH_SHORT).show());
     }
   }
 
   @Override
   public View onCreateView(
-      final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+          final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
     return inflater.inflate(layout, container, false);
   }
 
@@ -327,7 +314,6 @@ public class CameraConnectionFragment extends Fragment {
   }
 
   /** Sets up member variables related to camera. */
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   private void setUpCameraOutputs() {
     final Activity activity = getActivity();
     final CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
@@ -378,6 +364,7 @@ public class CameraConnectionFragment extends Fragment {
       if (!cameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
         throw new RuntimeException("Time out waiting to lock camera opening.");
       }
+
       manager.openCamera(cameraId, stateCallback, backgroundHandler);
     } catch (final CameraAccessException e) {
       LOGGER.e(e, "Exception!");
@@ -488,7 +475,7 @@ public class CameraConnectionFragment extends Fragment {
 
             @Override
             public void onConfigureFailed(final CameraCaptureSession cameraCaptureSession) {
-              showToast("Failed");
+              showToast();
             }
           },
           null);

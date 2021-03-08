@@ -3,7 +3,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.drm.DrmStore;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -11,19 +13,24 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.captcam1.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Registro extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText txtcorreo;
+    DatabaseReference mRootReference;
+
+    private EditText txtNombre;
+
+    private EditText txtCorreo;
     private EditText txtPassword;
-    private Button btnGuardar;
-    private Button btnFoto;
+    private EditText txtCompPassword;
 
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
@@ -32,22 +39,33 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mRootReference=FirebaseDatabase.getInstance().getReference();
+
         setContentView(R.layout.activity_registro);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        txtcorreo = findViewById(R.id.edCorreo);
+        txtNombre=findViewById(R.id.edNombre);
+        txtCorreo = findViewById(R.id.edCorreo);
         txtPassword = findViewById(R.id.edPassword);
-        btnFoto=findViewById(R.id.btnTomarFoto);
+        findViewById(R.id.btnTomarFoto);
 
-         btnGuardar = findViewById(R.id.btnGuardar);
+        Button btnGuardar = findViewById(R.id.btnGuardar);
          progressDialog = new ProgressDialog(this);
         btnGuardar.setOnClickListener(this);
 
     }
 
-    private void registrarUsuario() {
-        final String email= txtcorreo.getText().toString().trim();
+
+   private void registrarUsuario() {
+        final String nombre=txtNombre.getText().toString().trim();
+        final String email= txtCorreo.getText().toString().trim();
         final String password= txtPassword.getText().toString().trim();
+
+        if(TextUtils.isEmpty(nombre)) {
+            Toast.makeText(this,"se debe ingresar un nombre de usuario", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         if(TextUtils.isEmpty(email)) {
             Toast.makeText(this,"se debe ingresar un correo", Toast.LENGTH_LONG).show();
@@ -58,33 +76,45 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
             return;
         }
 
+
         progressDialog.setMessage("Realizando registro en linea...");
         progressDialog.show();
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        //checking if success
-                        if(task.isSuccessful()){
+                .addOnCompleteListener(this, task -> {
+                    //checking if success
+                    if(task.isSuccessful()){
 
-                            Toast.makeText(Registro.this,"Se ha registrado el usuario con el email: "+ txtcorreo.getText(),Toast.LENGTH_LONG).show();
-                        }else{
+                        Toast.makeText(Registro.this,"Se ha registrado el usuario con el email: "+ txtCorreo.getText(),Toast.LENGTH_LONG).show();
+                    }else{
 
-                            Toast.makeText(Registro.this,"No se pudo registrar el usuario ",Toast.LENGTH_LONG).show();
-                        }
-                        progressDialog.dismiss();
+                        Toast.makeText(Registro.this,"No se pudo registrar el usuario ",Toast.LENGTH_LONG).show();
                     }
+                    progressDialog.dismiss();
                 });
+
+               Map<String,Object> datosUsuario=new HashMap<>();
+               datosUsuario.put("nombre", nombre);
+               datosUsuario.put("email",email);
+               mRootReference.child("Usuario").push().setValue(datosUsuario);
 
 
     }
 
+    private void limpiarTexto (){
+        txtNombre.setText("");
+        txtCorreo.setText("");
+        txtPassword.setText("");
+    }
 
-    @Override
-    public void onClick(View view) {
-        //Invocamos al método:
-        registrarUsuario();
-
+    private void ejecutar(){
+        final Handler handler= new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                metodoEjecutar();
+               // handler.postDelayed(this,10000);//se ejecutara cada 10 segundos
+            }
+        },7000);
     }
     public void BotonRegresar(View v){
 
@@ -93,6 +123,25 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         startActivityForResult(intent,1);
 
     }
+    private void metodoEjecutar() {
+        limpiarTexto();
+
+
+    }
+
+
+
+
+    @Override
+    public void onClick(View view) {
+
+       registrarUsuario();
+       ejecutar();
+       BotonRegresar(view);
+
+
+    }
+
     public void BotonFoto(View v){
 
         Intent intent=new Intent(v.getContext(), DetectorActivity.class);
