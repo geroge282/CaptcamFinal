@@ -9,10 +9,11 @@
     <ImageView
         android:id="@+id/ImgUsuario"
         android:layout_width="443dp"
-        android:layout_height="318dp"
+        android:layout_height="0dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginBottom="242dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnActivar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -74,7 +75,10 @@
         android:id="@+id/btnActivar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="93dp"
         android:text="activar Seguridad"
-        tools:layout_editor_absoluteX="125dp"
-        tools:layout_editor_absoluteY="563dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ImgUsuario" />
 </androidx.constraintlayout.widget.ConstraintLayout>

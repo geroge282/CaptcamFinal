@@ -86,6 +86,7 @@ public class Registro extends AppCompatActivity  {
                     public void onComplete(@NonNull Task<Void> task2) {
                         if (task2.isSuccessful()){
                             startActivity(new Intent(Registro.this,AuthActivity.class));
+                            Toast.makeText(Registro.this,"Registro exitoso ingrese con correo y password",Toast.LENGTH_SHORT).show();
                             finish();
                         }
                         else{

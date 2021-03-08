@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -134,6 +135,15 @@ public class AuthActivity extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    protected void onStart() {
+
+        super.onStart();
+        if (mAuth.getCurrentUser() !=null){
+        startActivity(new Intent(AuthActivity.this,homeUsuario.class));
+        finish();
+        }
     }
 
 
