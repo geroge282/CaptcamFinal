@@ -22,17 +22,12 @@
     android:background="#00000000">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
         android:orientation="vertical">
 
-
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context="org.tensorflow.demo.CameraActivity" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -42,10 +37,10 @@
             android:background="@color/tfe_semi_transparent">
 
             <ImageView
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/tfl2_logo" />
+                android:src="@drawable/tfl2_logo"
+                android:visibility="gone" />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -69,7 +64,7 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add"
+        android:id="@+id/fab_add1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|top"
@@ -107,6 +102,13 @@
             app:layout_anchorGravity="top|end"
             android:contentDescription="TODO" />
 
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_anchor="@+id/relativeLayout"
+        app:layout_anchorGravity="center"
+        tools:context="org.tensorflow.demo.CameraActivity" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

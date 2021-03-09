@@ -23,7 +23,7 @@
         <activity android:name=".interface_captcam.confirmacion" />
         <activity android:name=".interface_captcam.homeUsuario" />
         <activity android:name=".interface_captcam.Registro" />
-        <activity android:name=".interface_captcam.DetectorActivity"/>
+
         <activity android:name=".interface_captcam.AuthActivity">
 
 
