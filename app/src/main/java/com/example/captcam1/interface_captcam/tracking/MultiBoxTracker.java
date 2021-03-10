@@ -36,7 +36,7 @@ import com.example.captcam1.interface_captcam.env.ImageUtils;
 import com.example.captcam1.interface_captcam.env.Logger;
 import com.example.captcam1.interface_captcam.tflite.SimilarityClassifier.Recognition;
 
-/** A tracker that handles non-max suppression and matches existing objects to new detections. */
+
 public class MultiBoxTracker {
   private static final float TEXT_SIZE_DIP = 18;
   private static final float MIN_SIZE = 16.0f;

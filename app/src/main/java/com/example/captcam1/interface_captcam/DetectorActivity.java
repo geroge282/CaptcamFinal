@@ -18,6 +18,7 @@ package com.example.captcam1.interface_captcam;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -27,6 +28,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.hardware.camera2.CameraCharacteristics;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.Bundle;
@@ -62,10 +64,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * An activity that uses a TensorFlowMultiBoxDetector and ObjectTracker to detect and then track
- * objects.
- */
 public class DetectorActivity extends CameraActivity implements OnImageAvailableListener {
   private static final Logger LOGGER = new Logger();
 
@@ -125,7 +123,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    fabAdd = findViewById(R.id.fab_add1);
+    fabAdd = findViewById(R.id.fab_add);
     fabAdd.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -369,31 +367,62 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     LayoutInflater inflater = getLayoutInflater();
     View dialogLayout = inflater.inflate(R.layout.image_edit_dialog, null);
    ImageView ivFace = dialogLayout.findViewById(R.id.dlg_image);
+
+
+
     TextView tvTitle = dialogLayout.findViewById(R.id.dlg_title);
     EditText etName = dialogLayout.findViewById(R.id.dlg_input);
 
     tvTitle.setText("Add Face");
+
+
+
     ivFace.setImageBitmap(rec.getCrop());//donde se muestra el rostro
+
+    Bitmap bitmap = ((BitmapDrawable)ivFace.getDrawable()).getBitmap();// transformacion
 
     etName.setHint("Input name");
 
     builder.setPositiveButton("OK", new DialogInterface.OnClickListener(){
+
+
+
       @Override
       public void onClick(DialogInterface dlg, int i) {
 
-          String name = etName.getText().toString();
+          String name = etName.getText().toString();/** se envia el nombre al registro*/
+
+
+
+
+
+
           if (name.isEmpty()) {
               return;
           }
           detector.register(name, rec);
 
+
+
           dlg.dismiss();
+        Intent intent=new Intent(getApplicationContext(),Registro.class);
+        intent.putExtra("nombre",etName.getText().toString());
+        intent.putExtra("bitMap",bitmap);
+        startActivity(intent);
+
+
+
+
+
+
+
       }
     });
     builder.setView(dialogLayout);
     builder.show();
 
   }
+
 
   private void updateResults(long currTimestamp, final List<SimilarityClassifier.Recognition> mappedRecognitions) {
 

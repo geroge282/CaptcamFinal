@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,21 +8,19 @@
     android:gravity="center"
     tools:context=".interface_captcam.Registro">
 
-    <FrameLayout
-        android:id="@+id/container"
+    <ImageView
+        android:id="@+id/imageViewId"
+        android:layout_weight="9"
         android:layout_width="match_parent"
-        android:layout_height="530dp"
-        android:layout_gravity="center"
-        android:scaleType="centerInside"
-        tools:context="org.tensorflow.demo.CameraActivity" />
-
+        android:layout_height="48pt" />
 
     <Button
         android:id="@+id/btnTomarFoto"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TOMAR FOTO"
-        android:layout_height="10dp" />
+
+        android:text="TOMAR FOTO" />
 
     <EditText
         android:id="@+id/edNombre"

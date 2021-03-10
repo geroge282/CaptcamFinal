@@ -58,6 +58,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.example.captcam1.interface_captcam.env.ImageUtils;
 import com.example.captcam1.interface_captcam.env.Logger;
 
+import java.io.File;
 import java.nio.ByteBuffer;
 
 public abstract class CameraActivity extends AppCompatActivity
@@ -247,7 +248,7 @@ public abstract class CameraActivity extends AppCompatActivity
     return yuvBytes[0];
   }
 
-  /** Callback for android.hardware.Camera API */
+
   @Override
   public void onPreviewFrame(final byte[] bytes, final Camera camera) {
     if (isProcessingFrame) {
@@ -261,8 +262,7 @@ public abstract class CameraActivity extends AppCompatActivity
         Camera.Size previewSize = camera.getParameters().getPreviewSize();
         previewHeight = previewSize.height;
         previewWidth = previewSize.width;
-        //rgbBytes = new int[previewWidth * previewHeight];
-        //onPreviewSizeChosen(new Size(previewSize.width, previewSize.height), 90);
+
           rgbBytes = new int[previewWidth * previewHeight];
           int rotation = 90;
           if (useFacing == CameraCharacteristics.LENS_FACING_FRONT) {
@@ -307,16 +307,21 @@ public abstract class CameraActivity extends AppCompatActivity
     }
     if (rgbBytes == null) {
       rgbBytes = new int[previewWidth * previewHeight];
+
     }
+
     try {
       final Image image = reader.acquireLatestImage();
+
 
       if (image == null) {
         return;
       }
 
       if (isProcessingFrame) {
+
         image.close();
+
         return;
       }
       isProcessingFrame = true;
@@ -354,6 +359,7 @@ public abstract class CameraActivity extends AppCompatActivity
           };
 
       processImage();
+
     } catch (final Exception e) {
       LOGGER.e(e, "Exception!");
       Trace.endSection();
@@ -447,7 +453,7 @@ public abstract class CameraActivity extends AppCompatActivity
       if (shouldShowRequestPermissionRationale(PERMISSION_CAMERA)) {
         Toast.makeText(
                 com.example.captcam1.interface_captcam.CameraActivity.this,
-                "Camera permission is required for this demo",
+                "se necesita permisos en la cámara",
                 Toast.LENGTH_LONG)
             .show();
       }
@@ -462,7 +468,7 @@ public abstract class CameraActivity extends AppCompatActivity
     if (deviceLevel == CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY) {
       return requiredLevel == deviceLevel;
     }
-    // deviceLevel is not LEGACY, can use numerical sort
+
     return requiredLevel <= deviceLevel;
   }
 
@@ -484,14 +490,7 @@ public abstract class CameraActivity extends AppCompatActivity
                     continue;
                 }
 
-                // Fallback to camera1 API for internal cameras that don't have full support.
-                // This should help with legacy situations where using the camera2 API causes
-                // distorted or otherwise broken previews.
-                //final int facing =
-                //(facing == CameraCharacteristics.LENS_FACING_EXTERNAL)
-//        if (!facing.equals(useFacing)) {
-//          continue;
-//        }
+
 
                 final Integer facing = characteristics.get(CameraCharacteristics.LENS_FACING);
 
