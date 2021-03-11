@@ -1,6 +1,7 @@
 package com.example.captcam1.interface_captcam;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -16,8 +17,12 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.hardware.camera2.CameraCharacteristics;
 import android.media.ImageReader;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.SystemClock;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -51,6 +56,7 @@ import com.google.mlkit.vision.face.FaceDetector;
 import com.google.mlkit.vision.face.FaceDetectorOptions;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -72,7 +78,8 @@ public class Registro extends AppCompatActivity {
     private String password="";
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
-
+    String rutaImagen;
+    Bitmap bitmap1;
 
 
 
@@ -94,14 +101,12 @@ public class Registro extends AppCompatActivity {
 
 
         Intent intent=getIntent();
+
         mEditTextName.setText(intent.getStringExtra("nombre"));
         Bitmap bitmap = intent.getParcelableExtra("bitMap");
-        rostroP = (ImageView) findViewById(R.id.imageViewId);
+        rostroP = findViewById(R.id.imageViewId);
         rostroP.setImageBitmap(bitmap);
-
-
-
-
+        
 
 
 
@@ -125,6 +130,27 @@ public class Registro extends AppCompatActivity {
                 if(password.length()>=6){
 
                     registerUser();
+
+
+
+
+               /*     File imagenArchivo=null;
+                    try{
+                        imagenArchivo=crearImagen();
+
+                    }catch(IOException ex){
+
+                        Log.e("Error", ex.toString());
+                    }
+
+                    if(imagenArchivo !=null) {
+
+                        Uri fotoUri= FileProvider.getUriForFile(Registro.this,"com.example.captcam1.fileprovider",imagenArchivo);
+                        intent.putExtra("rostroP",fotoUri);
+                        startActivityForResult(intent,1);
+
+
+                    }*/
 
 
 
@@ -161,8 +187,15 @@ public class Registro extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task2) {
                         if (task2.isSuccessful()){
-                            startActivity(new Intent(Registro.this,AuthActivity.class));
-                            Toast.makeText(Registro.this,"Registro exitoso ingrese con correo y password",Toast.LENGTH_SHORT).show();
+
+
+
+
+                          startActivity(new Intent(Registro.this,AuthActivity.class));
+
+
+
+                            Toast.makeText(Registro.this,"Registro exitoso",Toast.LENGTH_SHORT).show();
 
 
                         }
@@ -178,9 +211,15 @@ public class Registro extends AppCompatActivity {
         }
     });
     }
+/*
+private File crearImagen() throws IOException {
+    String nombreImagen="captcam1_";
+    File directorio=getExternalFilesDir(Environment.DIRECTORY_DCIM);
+    File imagen=    File.createTempFile(nombreImagen,".jpg",directorio);
 
-
-
+    rutaImagen=imagen.getAbsolutePath();
+    return imagen;
+}*/
 
 
 }

@@ -379,7 +379,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     ivFace.setImageBitmap(rec.getCrop());//donde se muestra el rostro
 
-    Bitmap bitmap = ((BitmapDrawable)ivFace.getDrawable()).getBitmap();// transformacion
+    ivFace.buildDrawingCache();
+    Bitmap bitmap = ((BitmapDrawable)ivFace.getDrawable()).getBitmap();// transformacion ++++
+
+
 
     etName.setHint("Input name");
 
@@ -391,9 +394,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
       public void onClick(DialogInterface dlg, int i) {
 
           String name = etName.getText().toString();/** se envia el nombre al registro*/
-
-
-
 
 
 
@@ -409,10 +409,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         intent.putExtra("nombre",etName.getText().toString());
         intent.putExtra("bitMap",bitmap);
         startActivity(intent);
-
-
-
-
 
 
 

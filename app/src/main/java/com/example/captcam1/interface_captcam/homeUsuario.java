@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.captcam1.R;
@@ -26,6 +28,10 @@ public class homeUsuario extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener listener;
     private DatabaseReference mDatabase;
+    private ImageView ImgRostro;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +42,11 @@ public class homeUsuario extends AppCompatActivity {
         btnActivar=findViewById(R.id.btnActivar);
         txtNombreFinal=findViewById(R.id.txtNombreFinal);
         txtCorreoFinal=findViewById(R.id.txtCorreoFinal);
+
         mAuth=FirebaseAuth.getInstance();
+
+
+
 
         listener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -89,6 +99,7 @@ public class homeUsuario extends AppCompatActivity {
                 if(dataSnapshot.exists()){
                     String name =dataSnapshot.child("name").getValue().toString();
                     txtNombreFinal.setText(name);
+
                 }
             }
 
