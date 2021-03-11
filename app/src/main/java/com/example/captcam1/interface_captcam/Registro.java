@@ -106,8 +106,10 @@ public class Registro extends AppCompatActivity {
         Bitmap bitmap = intent.getParcelableExtra("bitMap");
         rostroP = findViewById(R.id.imageViewId);
         rostroP.setImageBitmap(bitmap);
-        
 
+
+        rostroP.buildDrawingCache();
+        bitmap1 = ((BitmapDrawable)rostroP.getDrawable()).getBitmap();
 
 
 
@@ -189,9 +191,9 @@ public class Registro extends AppCompatActivity {
                         if (task2.isSuccessful()){
 
 
-
-
-                          startActivity(new Intent(Registro.this,AuthActivity.class));
+                            Intent intentF =new Intent(Registro.this,homeUsuario.class);
+                            intentF.putExtra("rostroF",bitmap1);
+                            startActivity(intentF);
 
 
 

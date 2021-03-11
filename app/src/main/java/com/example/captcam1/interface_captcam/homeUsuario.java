@@ -45,6 +45,10 @@ public class homeUsuario extends AppCompatActivity {
 
         mAuth=FirebaseAuth.getInstance();
 
+        Intent intentF=getIntent();
+        Bitmap bitmap1 = intentF.getParcelableExtra("rostroF");
+        ImgRostro= findViewById(R.id.ImgUsuario);
+        ImgRostro.setImageBitmap(bitmap1);
 
 
 
