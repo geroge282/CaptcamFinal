@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".interface_captcam.homeUsuario">
+    tools:context="UISRAEL.JCofre.CAPTCAM.homeUsuario">
 
     <ImageView
         android:id="@+id/ImgUsuario"

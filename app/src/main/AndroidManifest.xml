@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.captcam1" >
+    package="UISRAEL.JCofre.CAPTCAM" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -26,7 +26,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.captcam1.fileprovider"
+            android:authorities="UISRAEL.JCofre.CAPTCAM.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -34,11 +34,11 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".interface_captcam.homeUsuario" />
-        <activity android:name=".interface_captcam.Registro" />
-        <activity android:name=".interface_captcam.cameraActivity" />
-        <activity android:name=".interface_captcam.detectorActivity" />
-        <activity android:name=".interface_captcam.authActivity" >
+        <activity android:name="UISRAEL.JCofre.CAPTCAM.homeUsuario" />
+        <activity android:name="UISRAEL.JCofre.CAPTCAM.Registro" />
+        <activity android:name="UISRAEL.JCofre.CAPTCAM.cameraActivity" />
+        <activity android:name="UISRAEL.JCofre.CAPTCAM.detectorActivity" />
+        <activity android:name="UISRAEL.JCofre.CAPTCAM.authActivity" >
             <meta-data
                 android:name="com.google.firebase.ml.vision.DEPENDENCIES"
                 android:value="face" />
