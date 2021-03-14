@@ -58,10 +58,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.example.captcam1.interface_captcam.env.ImageUtils;
 import com.example.captcam1.interface_captcam.env.Logger;
 
-import java.io.File;
 import java.nio.ByteBuffer;
 
-public abstract class CameraActivity extends AppCompatActivity
+public abstract class cameraActivity extends AppCompatActivity
     implements OnImageAvailableListener,
         Camera.PreviewCallback,
         CompoundButton.OnCheckedChangeListener,
@@ -452,7 +451,7 @@ public abstract class CameraActivity extends AppCompatActivity
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       if (shouldShowRequestPermissionRationale(PERMISSION_CAMERA)) {
         Toast.makeText(
-                com.example.captcam1.interface_captcam.CameraActivity.this,
+                cameraActivity.this,
                 "se necesita permisos en la cámara",
                 Toast.LENGTH_LONG)
             .show();
@@ -524,14 +523,14 @@ public abstract class CameraActivity extends AppCompatActivity
 
         Fragment fragment;
         if (useCamera2API) {
-            CameraConnectionFragment camera2Fragment =
-                    CameraConnectionFragment.newInstance(
-                            new CameraConnectionFragment.ConnectionCallback() {
+            cameraConnectionFragment camera2Fragment =
+                    cameraConnectionFragment.newInstance(
+                            new cameraConnectionFragment.ConnectionCallback() {
                                 @Override
                                 public void onPreviewSizeChosen(final Size size, final int rotation) {
                                     previewHeight = size.getHeight();
                                     previewWidth = size.getWidth();
-                                  com.example.captcam1.interface_captcam.CameraActivity.this.onPreviewSizeChosen(size, rotation);
+                                  cameraActivity.this.onPreviewSizeChosen(size, rotation);
                                 }
                             },
                             this,
@@ -546,7 +545,7 @@ public abstract class CameraActivity extends AppCompatActivity
           int facing = (useFacing == CameraCharacteristics.LENS_FACING_BACK) ?
                           Camera.CameraInfo.CAMERA_FACING_BACK :
                           Camera.CameraInfo.CAMERA_FACING_FRONT;
-            LegacyCameraConnectionFragment frag = new LegacyCameraConnectionFragment(this,
+            legacyCameraConnectionFragment frag = new legacyCameraConnectionFragment(this,
                     getLayoutId(),
                     getDesiredPreviewFrameSize(), facing);
             fragment = frag;

@@ -74,7 +74,7 @@ public class homeUsuario extends AppCompatActivity {
     }
 
     private void abrirAuthActivity() {
-        Intent i =new Intent(this, AuthActivity.class);
+        Intent i =new Intent(this, authActivity.class);
         startActivity(i);
         finish();
 

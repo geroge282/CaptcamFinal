@@ -36,9 +36,9 @@
 
         <activity android:name=".interface_captcam.homeUsuario" />
         <activity android:name=".interface_captcam.Registro" />
-        <activity android:name=".interface_captcam.CameraActivity" />
-        <activity android:name=".interface_captcam.DetectorActivity" />
-        <activity android:name=".interface_captcam.AuthActivity" >
+        <activity android:name=".interface_captcam.cameraActivity" />
+        <activity android:name=".interface_captcam.detectorActivity" />
+        <activity android:name=".interface_captcam.authActivity" >
             <meta-data
                 android:name="com.google.firebase.ml.vision.DEPENDENCIES"
                 android:value="face" />

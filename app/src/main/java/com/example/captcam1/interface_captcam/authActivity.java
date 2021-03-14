@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -23,7 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AuthActivity extends AppCompatActivity {
+public class authActivity extends AppCompatActivity {
     TextView correoAuth;
     TextView passwordAuth;
     Button btnIngresar;
@@ -45,9 +44,33 @@ public class AuthActivity extends AppCompatActivity {
            correoAuth=findViewById(R.id.ptUsuario);
            passwordAuth=findViewById(R.id.ptPassword);
            btnIngresar=findViewById(R.id.btnIngresar);
+           btnIngresar.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   ingresar();
+               }
+           });
+
            btnRegistrar=findViewById(R.id.btnRegistrar);
+           btnRegistrar.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent intent=new Intent(v.getContext(), Registro.class);
+                   startActivityForResult(intent,1);
+               }
+           });
 
            btnSalir=findViewById(R.id.btnSalir);
+           btnSalir.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+
+                   Intent intent=new Intent(Intent.ACTION_MAIN);
+                   intent.addCategory(Intent.CATEGORY_HOME);
+                   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                   startActivity(intent);
+               }
+           });
            pbCarga=findViewById(R.id.pbCarga);
            pbCarga.setVisibility(View.INVISIBLE);
            mAuth = FirebaseAuth.getInstance();
@@ -73,9 +96,9 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void solicitarpermisos() {
-        int permisoMemoria= ActivityCompat.checkSelfPermission(AuthActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        int permisoEscrituraMemoria= ActivityCompat.checkSelfPermission(AuthActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        int permisoCamara= ActivityCompat.checkSelfPermission(AuthActivity.this, Manifest.permission.CAMERA);
+        int permisoMemoria= ActivityCompat.checkSelfPermission(authActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        int permisoEscrituraMemoria= ActivityCompat.checkSelfPermission(authActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permisoCamara= ActivityCompat.checkSelfPermission(authActivity.this, Manifest.permission.CAMERA);
 
         if(permisoEscrituraMemoria!= PackageManager.PERMISSION_GRANTED || permisoMemoria!=PackageManager.PERMISSION_GRANTED || permisoCamara!=PackageManager.PERMISSION_GRANTED){
             if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
@@ -91,9 +114,7 @@ public class AuthActivity extends AppCompatActivity {
         finish();
     }
 
-    public void btnIngresar(View v){
-    ingresar();
-    }
+
 
     private void ingresar() {
         String email =correoAuth.getText().toString();
@@ -116,32 +137,12 @@ public class AuthActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-    public void BotonRegistro(View v){
-
-
-       Intent intent=new Intent(v.getContext(), Registro.class);
-        startActivityForResult(intent,1);
-
-    }
-
-
-
-    public void BotonSalir(View v){
-
-        Intent intent=new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
+    
     protected void onStart() {
 
         super.onStart();
         if (mAuth.getCurrentUser() !=null){
-        startActivity(new Intent(AuthActivity.this,homeUsuario.class));
+        startActivity(new Intent(authActivity.this,homeUsuario.class));
         finish();
         }
     }

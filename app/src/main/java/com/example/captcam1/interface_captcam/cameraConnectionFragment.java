@@ -66,7 +66,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 @SuppressLint("ValidFragment")
-public class CameraConnectionFragment extends Fragment {
+public class cameraConnectionFragment extends Fragment {
   private static final Logger LOGGER = new Logger();
 
   /**
@@ -185,7 +185,7 @@ public class CameraConnectionFragment extends Fragment {
         public void onSurfaceTextureUpdated(final SurfaceTexture texture) {}
       };
 
-  private CameraConnectionFragment(
+  private cameraConnectionFragment(
       final ConnectionCallback connectionCallback,
       final OnImageAvailableListener imageListener,
       final int layout,
@@ -238,12 +238,12 @@ public class CameraConnectionFragment extends Fragment {
     }
   }
 
-  public static com.example.captcam1.interface_captcam.CameraConnectionFragment newInstance(
+  public static cameraConnectionFragment newInstance(
       final ConnectionCallback callback,
       final OnImageAvailableListener imageListener,
       final int layout,
       final Size inputSize) {
-    return new com.example.captcam1.interface_captcam.CameraConnectionFragment(callback, imageListener, layout, inputSize);
+    return new cameraConnectionFragment(callback, imageListener, layout, inputSize);
   }
 
   /**

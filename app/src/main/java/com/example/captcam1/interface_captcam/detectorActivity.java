@@ -64,7 +64,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DetectorActivity extends CameraActivity implements OnImageAvailableListener {
+public class detectorActivity extends cameraActivity implements OnImageAvailableListener {
   private static final Logger LOGGER = new Logger();
 
   private static final int TF_OD_API_INPUT_SIZE = 112;

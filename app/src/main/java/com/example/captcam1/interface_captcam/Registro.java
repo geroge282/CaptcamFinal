@@ -1,66 +1,27 @@
 package com.example.captcam1.interface_captcam;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
-import android.hardware.camera2.CameraCharacteristics;
-import android.media.ImageReader;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.SystemClock;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.util.Size;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.captcam1.R;
-import com.example.captcam1.interface_captcam.customview.OverlayView;
-import com.example.captcam1.interface_captcam.env.BorderedText;
-import com.example.captcam1.interface_captcam.env.ImageUtils;
-import com.example.captcam1.interface_captcam.env.Logger;
-import com.example.captcam1.interface_captcam.tflite.SimilarityClassifier;
-import com.example.captcam1.interface_captcam.tflite.TFLiteObjectDetectionAPIModel;
-import com.example.captcam1.interface_captcam.tracking.MultiBoxTracker;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.mlkit.vision.common.InputImage;
-import com.google.mlkit.vision.face.Face;
-import com.google.mlkit.vision.face.FaceDetection;
-import com.google.mlkit.vision.face.FaceDetector;
-import com.google.mlkit.vision.face.FaceDetectorOptions;
 
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 
@@ -116,7 +77,7 @@ public class Registro extends AppCompatActivity {
         mButtonCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(v.getContext(), DetectorActivity.class);
+                Intent intent=new Intent(v.getContext(), detectorActivity.class);
                 startActivityForResult(intent,1);
             }
         });
