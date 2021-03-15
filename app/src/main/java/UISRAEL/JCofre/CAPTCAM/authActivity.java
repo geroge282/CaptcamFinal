@@ -15,7 +15,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import UISRAEL.JCofre.CAPTCAM.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -55,7 +54,7 @@ public class authActivity extends AppCompatActivity {
            btnRegistrar.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
-                   Intent intent=new Intent(v.getContext(), Registro.class);
+                   Intent intent=new Intent(v.getContext(), registroUsuario.class);
                    startActivityForResult(intent,1);
                }
            });

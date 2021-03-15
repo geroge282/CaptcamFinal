@@ -42,7 +42,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import UISRAEL.JCofre.CAPTCAM.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.mlkit.vision.common.InputImage;
@@ -373,7 +372,7 @@ public class detectorActivity extends cameraActivity implements OnImageAvailable
     TextView tvTitle = dialogLayout.findViewById(R.id.dlg_title);
     EditText etName = dialogLayout.findViewById(R.id.dlg_input);
 
-    tvTitle.setText("Add Face");
+    tvTitle.setText("Agregar rostro");
 
 
 
@@ -384,7 +383,7 @@ public class detectorActivity extends cameraActivity implements OnImageAvailable
 
 
 
-    etName.setHint("Input name");
+    etName.setHint("Ingrese el nombre");
 
     builder.setPositiveButton("OK", new DialogInterface.OnClickListener(){
 
@@ -405,7 +404,7 @@ public class detectorActivity extends cameraActivity implements OnImageAvailable
 
 
           dlg.dismiss();
-        Intent intent=new Intent(getApplicationContext(),Registro.class);
+        Intent intent=new Intent(getApplicationContext(), registroUsuario.class);/** aqui se envia los datos al registro como el rostro y el nombre*/
         intent.putExtra("nombre",etName.getText().toString());
         intent.putExtra("bitMap",bitmap);
         startActivity(intent);

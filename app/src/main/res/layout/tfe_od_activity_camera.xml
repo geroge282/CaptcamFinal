@@ -44,6 +44,12 @@
 
         </androidx.appcompat.widget.Toolbar>
 
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="org.tensorflow.demo.CameraActivity" />
+
     </RelativeLayout>
 
     <include
@@ -90,25 +96,28 @@
 <!--        app:layout_anchorGravity="bottom|center"-->
 <!--        app:layout_anchor="@id/dummy" />-->
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_seach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_search_category_default"
-            android:tint="@android:color/white"
-            android:layout_margin="16dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_seach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="TODO"
+        android:src="@android:drawable/ic_search_category_default"
 
-            app:layout_anchor="@id/bottom_sheet_layout"
-            app:layout_anchorGravity="top|end"
-            android:contentDescription="TODO" />
+        android:tint="@android:color/white"
+        android:visibility="invisible"
+        app:layout_anchor="@id/bottom_sheet_layout"
+        app:layout_anchorGravity="top|end" />
 
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_anchor="@+id/relativeLayout"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="328dp"
+        android:layout_height="208dp"
+        app:layout_anchor="@+id/bottom_sheet_layout"
         app:layout_anchorGravity="center"
-        tools:context="org.tensorflow.demo.CameraActivity" />
-
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="17882-face-recognition.json"
+        app:lottie_imageAssetsFolder="assets"
+        app:lottie_loop="true" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

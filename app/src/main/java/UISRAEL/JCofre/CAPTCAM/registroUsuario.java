@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import UISRAEL.JCofre.CAPTCAM.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,11 +25,12 @@ import java.util.Map;
 
 
 
-public class Registro extends AppCompatActivity {
+public class registroUsuario extends AppCompatActivity {
     private EditText mEditTextName;
     private EditText mEditTextEmail;
     private EditText mEditTextPassword;
     private Button  mButtonRegister;
+    private Button mButtonRegresar;
     private Button mButtonCamera;
     private ImageView rostroP;
     //variables de datos a registrar
@@ -59,6 +59,7 @@ public class Registro extends AppCompatActivity {
         mEditTextPassword=findViewById(R.id.edPassword);
         mButtonRegister=findViewById(R.id.btnGuardar);
         mButtonCamera=findViewById(R.id.btnTomarFoto);
+        mButtonRegresar=findViewById(R.id.btnRegresar);
 
 
         Intent intent=getIntent();
@@ -72,7 +73,13 @@ public class Registro extends AppCompatActivity {
         rostroP.buildDrawingCache();
         bitmap1 = ((BitmapDrawable)rostroP.getDrawable()).getBitmap();
 
-
+        mButtonRegresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(registroUsuario.this, authActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
 
         mButtonCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +115,7 @@ public class Registro extends AppCompatActivity {
 
                     if(imagenArchivo !=null) {
 
-                        Uri fotoUri= FileProvider.getUriForFile(Registro.this,"com.example.captcam1.fileprovider",imagenArchivo);
+                        Uri fotoUri= FileProvider.getUriForFile(registroUsuario.this,"com.example.captcam1.fileprovider",imagenArchivo);
                         intent.putExtra("rostroP",fotoUri);
                         startActivityForResult(intent,1);
 
@@ -119,12 +126,12 @@ public class Registro extends AppCompatActivity {
 
                 }
                 else{
-                    Toast.makeText(Registro.this,"el password debe tener almenos 6 caracteres",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(registroUsuario.this,"el password debe tener almenos 6 caracteres",Toast.LENGTH_SHORT).show();
                 }
 
             }
             else{
-                Toast.makeText(Registro.this,"debe completar los compos",Toast.LENGTH_SHORT).show();
+                Toast.makeText(registroUsuario.this,"debe completar los compos",Toast.LENGTH_SHORT).show();
             }
 
 
@@ -152,24 +159,24 @@ public class Registro extends AppCompatActivity {
                         if (task2.isSuccessful()){
 
 
-                            Intent intentF =new Intent(Registro.this,homeUsuario.class);
+                            Intent intentF =new Intent(registroUsuario.this,homeUsuario.class);
                             intentF.putExtra("rostroF",bitmap1);
                             startActivity(intentF);
 
 
 
-                            Toast.makeText(Registro.this,"Registro exitoso",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(registroUsuario.this,"registroUsuario exitoso",Toast.LENGTH_SHORT).show();
 
 
                         }
                         else{
-                            Toast.makeText(Registro.this,"no se pudieron crear los datos correctamente",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(registroUsuario.this,"no se pudieron crear los datos correctamente",Toast.LENGTH_SHORT).show();
                         }
 
                     }
                 });
             }else {
-                Toast.makeText(Registro.this,"No se pudo registrar este usuario", Toast.LENGTH_SHORT).show();
+                Toast.makeText(registroUsuario.this,"No se pudo registrar este usuario", Toast.LENGTH_SHORT).show();
             }
         }
     });

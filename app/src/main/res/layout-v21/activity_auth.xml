@@ -19,10 +19,19 @@
 
     <ImageView
         android:id="@+id/imvLogo"
-        android:layout_width="397dp"
-        android:layout_height="274dp"
+        android:layout_width="204dp"
+        android:layout_height="wrap_content"
         android:layout_weight="0"
         app:srcCompat="@mipmap/ic_logo_foreground" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view2"
+        android:layout_width="244dp"
+        android:layout_height="255dp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="7697-cc-camera.json"
+        app:lottie_imageAssetsFolder="assets"
+        app:lottie_loop="true" />
 
     <EditText
         android:id="@+id/ptUsuario"
