@@ -25,7 +25,7 @@ public class homeUsuario extends AppCompatActivity {
     private Button btnActivar;
     private TextView txtNombreFinal;
     private TextView txtCorreoFinal;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth; 
     private FirebaseAuth.AuthStateListener listener;
     private DatabaseReference mDatabase;
     private ImageView ImgRostro;

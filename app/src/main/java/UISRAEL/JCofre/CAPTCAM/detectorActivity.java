@@ -31,8 +31,11 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.hardware.camera2.CameraCharacteristics;
 import android.media.ImageReader.OnImageAvailableListener;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.SystemClock;
+import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -42,6 +45,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.FileProvider;
+
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.mlkit.vision.common.InputImage;
@@ -59,6 +65,9 @@ import UISRAEL.JCofre.CAPTCAM.tflite.SimilarityClassifier;
 import UISRAEL.JCofre.CAPTCAM.tflite.TFLiteObjectDetectionAPIModel;
 import UISRAEL.JCofre.CAPTCAM.tracking.MultiBoxTracker;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -113,8 +122,8 @@ public class detectorActivity extends cameraActivity implements OnImageAvailable
 
   private Bitmap faceBmp = null;
 
-  private FloatingActionButton fabAdd;
-
+  private LottieAnimationView fabAdd;
+  String rutaImagen;
 
 
 
@@ -378,9 +387,10 @@ public class detectorActivity extends cameraActivity implements OnImageAvailable
 
     ivFace.setImageBitmap(rec.getCrop());//donde se muestra el rostro
 
-    ivFace.buildDrawingCache();
-    Bitmap bitmap = ((BitmapDrawable)ivFace.getDrawable()).getBitmap();// transformacion ++++
 
+
+    BitmapDrawable draw = (BitmapDrawable) ivFace.getDrawable();
+    Bitmap bitmap = draw.getBitmap();
 
 
     etName.setHint("Ingrese el nombre");
@@ -404,10 +414,37 @@ public class detectorActivity extends cameraActivity implements OnImageAvailable
 
 
           dlg.dismiss();
+
+        FileOutputStream outStream = null;                                        /** ALAMACEN DE ROSTROS  **/
+        File sdCard = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File dir = new File(sdCard.getAbsolutePath() + "/CAPTCAM");
+        dir.mkdirs();
+        String fileName = String.format("%d.jpg", System.currentTimeMillis());
+        File outFile = new File(dir, fileName);
+        try {
+          outStream = new FileOutputStream(outFile);
+        } catch (FileNotFoundException e) {
+          e.printStackTrace();
+        }
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+        try {
+          outStream.flush();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        try {
+          outStream.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+
         Intent intent=new Intent(getApplicationContext(), registroUsuario.class);/** aqui se envia los datos al registro como el rostro y el nombre*/
         intent.putExtra("nombre",etName.getText().toString());
         intent.putExtra("bitMap",bitmap);
         startActivity(intent);
+
+
+
 
 
 
@@ -417,6 +454,7 @@ public class detectorActivity extends cameraActivity implements OnImageAvailable
     builder.show();
 
   }
+
 
 
   private void updateResults(long currTimestamp, final List<SimilarityClassifier.Recognition> mappedRecognitions) {

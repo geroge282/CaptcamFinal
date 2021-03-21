@@ -1,11 +1,15 @@
 package UISRAEL.JCofre.CAPTCAM;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,9 +35,6 @@ public class registroUsuario extends AppCompatActivity {
     private EditText mEditTextName;
     private EditText mEditTextEmail;
     private EditText mEditTextPassword;
-    private Button  mButtonRegister;
-    private Button mButtonRegresar;
-    private Button mButtonCamera;
     private ImageView rostroP;
     //variables de datos a registrar
     private String name="";
@@ -57,9 +60,11 @@ public class registroUsuario extends AppCompatActivity {
         mEditTextName=findViewById(R.id.edNombre);
         mEditTextEmail=findViewById(R.id.edCorreo);
         mEditTextPassword=findViewById(R.id.edPassword);
-        mButtonRegister=findViewById(R.id.btnGuardar);
-        mButtonCamera=findViewById(R.id.btnTomarFoto);
-        mButtonRegresar=findViewById(R.id.btnRegresar);
+        Button mButtonRegister = findViewById(R.id.btnGuardar);
+        Button mButtonCamera = findViewById(R.id.btnTomarFoto);
+        Button mButtonRegresar = findViewById(R.id.btnRegresar);
+        Button mButtonGuardar= findViewById(R.id.guardarRostro);
+
 
 
         Intent intent=getIntent();
@@ -72,6 +77,16 @@ public class registroUsuario extends AppCompatActivity {
 
         rostroP.buildDrawingCache();
         bitmap1 = ((BitmapDrawable)rostroP.getDrawable()).getBitmap();
+
+        mButtonGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+
 
         mButtonRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,28 +115,6 @@ public class registroUsuario extends AppCompatActivity {
                 if(password.length()>=6){
 
                     registerUser();
-
-
-
-
-               /*     File imagenArchivo=null;
-                    try{
-                        imagenArchivo=crearImagen();
-
-                    }catch(IOException ex){
-
-                        Log.e("Error", ex.toString());
-                    }
-
-                    if(imagenArchivo !=null) {
-
-                        Uri fotoUri= FileProvider.getUriForFile(registroUsuario.this,"com.example.captcam1.fileprovider",imagenArchivo);
-                        intent.putExtra("rostroP",fotoUri);
-                        startActivityForResult(intent,1);
-
-
-                    }*/
-
 
 
                 }
@@ -181,15 +174,6 @@ public class registroUsuario extends AppCompatActivity {
         }
     });
     }
-/*
-private File crearImagen() throws IOException {
-    String nombreImagen="captcam1_";
-    File directorio=getExternalFilesDir(Environment.DIRECTORY_DCIM);
-    File imagen=    File.createTempFile(nombreImagen,".jpg",directorio);
-
-    rutaImagen=imagen.getAbsolutePath();
-    return imagen;
-}*/
 
 
 }
