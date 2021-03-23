@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">CAPTCAM</string>
     <string name="detectar">DETECTAR</string>
 
@@ -13,5 +13,13 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="verificar">VERIFICAR</string>
+
+    <string name="imagen_nueva">IMAGEN NUEVA</string>
+    <string name="imagen_inicial">IMAGEN INICIAL</string>
+    <string name="result">Result :</string>
+    <string name="verificacion_de_rostros">VERIFICACION DE ROSTROS</string>
+    <string name="uno">UNO</string>
+    <string name="dos">DOS</string>
 
 </resources>

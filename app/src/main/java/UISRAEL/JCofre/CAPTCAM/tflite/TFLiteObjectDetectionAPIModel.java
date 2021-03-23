@@ -33,14 +33,14 @@ public class TFLiteObjectDetectionAPIModel
   private static final Logger LOGGER = new Logger();
 
 
-  private static final int OUTPUT_SIZE = 192;
+  private static final int OUTPUT_SIZE = 192;//192
 
 
   private static final int NUM_DETECTIONS = 1;
 
 
-  private static final float IMAGE_MEAN = 128.0f;
-  private static final float IMAGE_STD = 128.0f;
+  private static final float IMAGE_MEAN = 128.0f;//128
+  private static final float IMAGE_STD = 128.0f; //128
 
 
   private static final int NUM_THREADS = 4;

@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,53 +28,62 @@ public class authActivity extends AppCompatActivity {
     Button btnIngresar;
     Button btnSalir;
     Button btnRegistrar;
+    Button demo;
     FirebaseAuth mAuth;
     ProgressBar pbCarga;
 
     FirebaseAuth.AuthStateListener listener;
     final private int REQUEST_CODE_ASK_PERMISSION=111;
 
-//aqui cambio
+    //aqui cambio
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         solicitarpermisos();
 
         setContentView(R.layout.activity_auth);
-           correoAuth=findViewById(R.id.ptUsuario);
-           passwordAuth=findViewById(R.id.ptPassword);
-           btnIngresar=findViewById(R.id.btnIngresar);
-           btnIngresar.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   ingresar();
-               }
-           });
+        correoAuth=findViewById(R.id.ptUsuario);
+        passwordAuth=findViewById(R.id.ptPassword);
+        demo=findViewById(R.id.btnDemo);
+        demo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(),detectorActivity.class);
+                startActivityForResult(intent,1);
+            }
+        });
+        btnIngresar=findViewById(R.id.btnIngresar);
+        btnIngresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ingresar();
+            }
+        });
 
-           btnRegistrar=findViewById(R.id.btnRegistrar);
-           btnRegistrar.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   Intent intent=new Intent(v.getContext(), registroUsuario.class);
-                   startActivityForResult(intent,1);
-               }
-           });
+        btnRegistrar=findViewById(R.id.btnRegistrar);
+        btnRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(), registroUsuario.class);
+                startActivityForResult(intent,1);
+            }
+        });
 
-           btnSalir=findViewById(R.id.btnSalir);
-           btnSalir.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
+        btnSalir=findViewById(R.id.btnSalir);
+        btnSalir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                   Intent intent=new Intent(Intent.ACTION_MAIN);
-                   intent.addCategory(Intent.CATEGORY_HOME);
-                   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                   startActivity(intent);
-               }
-           });
-           pbCarga=findViewById(R.id.pbCarga);
-           pbCarga.setVisibility(View.INVISIBLE);
-           mAuth = FirebaseAuth.getInstance();
-           listener = new FirebaseAuth.AuthStateListener() {
+                Intent intent=new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+        pbCarga=findViewById(R.id.pbCarga);
+        pbCarga.setVisibility(View.INVISIBLE);
+        mAuth = FirebaseAuth.getInstance();
+        listener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user=mAuth.getCurrentUser();
@@ -141,8 +151,8 @@ public class authActivity extends AppCompatActivity {
 
         super.onStart();
         if (mAuth.getCurrentUser() !=null){
-        startActivity(new Intent(authActivity.this,homeUsuario.class));
-        finish();
+            startActivity(new Intent(authActivity.this,homeUsuario.class));
+            finish();
         }
     }
 

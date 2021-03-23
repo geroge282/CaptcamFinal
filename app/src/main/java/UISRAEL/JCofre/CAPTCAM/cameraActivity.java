@@ -402,7 +402,9 @@ public abstract class cameraActivity extends AppCompatActivity
   @Override
   public synchronized void onStop() {
     LOGGER.d("onStop " + this);
+
     super.onStop();
+
   }
 
   @Override

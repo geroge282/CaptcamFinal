@@ -16,6 +16,7 @@
 
 package UISRAEL.JCofre.CAPTCAM;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -117,7 +118,6 @@ public class detectorActivity extends cameraActivity implements OnImageAvailable
 
   private FaceDetector faceDetector;
 
-
   private Bitmap portraitBmp = null;
 
   private Bitmap faceBmp = null;
@@ -139,7 +139,6 @@ public class detectorActivity extends cameraActivity implements OnImageAvailable
       }
     });
 
-
     FaceDetectorOptions options =
             new FaceDetectorOptions.Builder()
                     .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
@@ -153,11 +152,7 @@ public class detectorActivity extends cameraActivity implements OnImageAvailable
     faceDetector = detector;
 
 
-
-
   }
-
-
 
   private void onAddClick() {
 
@@ -389,8 +384,7 @@ public class detectorActivity extends cameraActivity implements OnImageAvailable
 
 
 
-    BitmapDrawable draw = (BitmapDrawable) ivFace.getDrawable();
-    Bitmap bitmap = draw.getBitmap();
+
 
 
     etName.setHint("Ingrese el nombre");
@@ -414,37 +408,13 @@ public class detectorActivity extends cameraActivity implements OnImageAvailable
 
 
           dlg.dismiss();
-
-        FileOutputStream outStream = null;                                        /** ALAMACEN DE ROSTROS  **/
-        File sdCard = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File dir = new File(sdCard.getAbsolutePath() + "/CAPTCAM");
-        dir.mkdirs();
-        String fileName = String.format("%d.jpg", System.currentTimeMillis());
-        File outFile = new File(dir, fileName);
-        try {
-          outStream = new FileOutputStream(outFile);
-        } catch (FileNotFoundException e) {
-          e.printStackTrace();
-        }
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
-        try {
-          outStream.flush();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-        try {
-          outStream.close();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-
-        Intent intent=new Intent(getApplicationContext(), registroUsuario.class);/** aqui se envia los datos al registro como el rostro y el nombre*/
+ /*BitmapDrawable draw = (BitmapDrawable) ivFace.getDrawable();
+    Bitmap bitmap = draw.getBitmap();*/
+       /* Intent intent=new Intent(getApplicationContext(), registroUsuario.class);
         intent.putExtra("nombre",etName.getText().toString());
         intent.putExtra("bitMap",bitmap);
-        startActivity(intent);
 
-
-
+        startActivity(intent);*/
 
 
 

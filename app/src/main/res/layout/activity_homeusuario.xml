@@ -4,76 +4,113 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context="UISRAEL.JCofre.CAPTCAM.homeUsuario">
 
     <ImageView
-        android:id="@+id/ImgUsuario"
-        android:layout_weight="9"
+        android:id="@+id/imgUsuario"
         android:layout_width="match_parent"
-        android:layout_height="48pt"/>
-
-    <TextView
-        android:id="@+id/txtEres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="ERES TU?"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-      />
-
-    <TextView
-        android:id="@+id/txtNombreFinal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-       />
-
+        android:layout_height="297dp"
+        android:src="@drawable/dowload" />
     <TextView
         android:id="@+id/txtInformacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:text="Tu Correo es:"
+        android:layout_marginTop="12dp"
+        android:text="TU CORREO ES:"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-      />
-
+        app:layout_constraintStart_toStartOf="parent" />
     <TextView
         android:id="@+id/txtCorreoFinal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="12dp"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtInformacion" />
 
-    <Button
-        android:id="@+id/btnActivar"
+
+    <TextView
+        android:id="@+id/txtEres"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="93dp"
-        android:text="activar Seguridad"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="12dp"
+        android:text="ERES TU?"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-         />
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/txtNombreFinal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:layout_weight="9"
+        android:orientation="horizontal">
+
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/disableBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/enableBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/button_ingresar"
+        android:text="DESACTIVAR" />
+    <Button
+        android:id="@+id/enableBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lock"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/button_ingresar"
+        android:text="ACTIVAR" />
 
     <Button
         android:id="@+id/btnCerrarSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="6dp"
         android:text="Cerrar Sesión"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/button_ingresar"
+        app:layout_constraintStart_toStartOf="parent" />
+|
+
+
+    <Button
+        android:id="@+id/btnActivar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:gravity="center"
+        android:text="DEMOSTRACION COMPARACION DE ROSTROS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/button_rounded"
         app:layout_constraintStart_toStartOf="parent" />
-</LinearLayout >
+
+    <Button
+        android:id="@+id/lock"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/button_rounded"
+        android:text="Bloquear telefono" />
+
+
+</LinearLayout>

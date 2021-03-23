@@ -11,6 +11,8 @@
     <ImageView
         android:id="@+id/imageViewId"
         android:layout_width="match_parent"
+        android:src="@drawable/dowload"
+
         android:layout_height="368dp" />
 
 
@@ -84,11 +86,7 @@
         android:hint="Confirmar Password"
         android:inputType="textPersonName|textPassword" />
 
-    <Button
-        android:id="@+id/guardarRostro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="GUARDAR ROSTRO" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
